@@ -11,7 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "@chainsafe/dappeteer": "^4.0.2",
-    "eth-lightwallet": "^4.0.0"
+    "eth-lightwallet": "^4.0.0",
+    "playwright": "^1.29.1"
   },
   "devDependencies": {
     "@types/eth-lightwallet": "^3.0.1",
