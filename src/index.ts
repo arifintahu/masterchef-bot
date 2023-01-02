@@ -4,6 +4,9 @@ import {
     Network,
     addNetwork,
 } from "./actions/network";
+import {
+    connectWallet,
+} from "./actions/market";
 
 const network: Network = { 
     networkName: "BSC",
@@ -27,6 +30,10 @@ async function main() {
     });
 
     await addNetwork(metaMask.page, network);
+
+    const daapPage = await browser.newPage();
+    await daapPage.goto("https://market.ninneko.com/");
+    await connectWallet(daapPage, metaMask);
 
     console.timeEnd();
 }
