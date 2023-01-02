@@ -1,4 +1,4 @@
-import * as lightwallet from 'eth-lightwallet';
+import * as lightwallet from "eth-lightwallet";
 
 interface Wallet {
     privateKey: string;
@@ -39,4 +39,4 @@ class WalletService {
     }
 }
 
-export default WalletService;
+export default new WalletService();

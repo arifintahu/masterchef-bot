@@ -1,6 +1,6 @@
-import * as dappeteer from '@chainsafe/dappeteer';
-import { generateUsername } from "unique-username-generator";
-import WalletService from "./services/wallet.service";
+import * as dappeteer from "@chainsafe/dappeteer";
+import WalletService from "./services/wallet";
+import UsernameService from "./services/username";
 import {
     Network,
     addNetwork,
@@ -9,10 +9,6 @@ import {
     connectWallet,
     setupAccount,
 } from "./actions/market";
-import {
-    getRndInteger,
-    getRndChars,
-} from "./utils";
 
 const network: Network = { 
     networkName: "BSC",
@@ -25,16 +21,12 @@ async function main() {
     console.time();
 
     // Generate username
-    const randomChars = getRndChars(2);
-    const randomLength = getRndInteger(15, 20);
-    const randomDigits = getRndInteger(2, 4);
-    const username = generateUsername(randomChars, randomDigits, randomLength);
+    const username = UsernameService.generate();
     const password = "Pass12345!"
     console.log("username:", username);
 
     // Generate wallet
-    const walletService = new WalletService();
-    const wallet = await walletService.generate(password);
+    const wallet = await WalletService.generate(password);
 
     // Run browser
     const { metaMask, browser } = await dappeteer.bootstrap({
