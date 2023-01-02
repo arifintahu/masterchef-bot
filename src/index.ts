@@ -31,7 +31,7 @@ async function main() {
     // Run browser
     const { metaMask, browser } = await dappeteer.bootstrap({
         seed: wallet.seedPhrase,
-        password: "Pass29292",
+        password: password,
         showTestNets: false,
         browser: "chrome",
     });
