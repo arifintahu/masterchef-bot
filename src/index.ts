@@ -24,9 +24,17 @@ const network: Network = {
 async function main() {
     console.time();
 
+    // Generate username
+    const randomChars = getRndChars(2);
+    const randomLength = getRndInteger(15, 20);
+    const randomDigits = getRndInteger(2, 4);
+    const username = generateUsername(randomChars, randomDigits, randomLength);
+    const password = "Pass12345!"
+    console.log("username:", username);
+
     // Generate wallet
     const walletService = new WalletService();
-    const wallet = await walletService.generate("Pass29292");
+    const wallet = await walletService.generate(password);
 
     // Run browser
     const { metaMask, browser } = await dappeteer.bootstrap({
@@ -43,14 +51,6 @@ async function main() {
     const daapPage = await browser.newPage();
     await daapPage.goto("https://market.ninneko.com/");
     await connectWallet(daapPage, metaMask);
-
-    // Generate username
-    const randomChars = getRndChars(2);
-    const randomLength = getRndInteger(15, 20);
-    const randomDigits = getRndInteger(2, 4);
-    const username = generateUsername(randomChars, randomDigits, randomLength);
-    const password = "Pass12345!"
-    console.log("username:", username);
 
     // Setup account
     await setupAccount(daapPage, username, password);
