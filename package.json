@@ -12,6 +12,7 @@
   "dependencies": {
     "@chainsafe/dappeteer": "^4.0.2",
     "eth-lightwallet": "^4.0.0",
+    "node-cron": "^3.0.2",
     "playwright": "^1.29.1",
     "unique-username-generator": "^1.1.3"
   },

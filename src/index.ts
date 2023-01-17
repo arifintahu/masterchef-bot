@@ -1,3 +1,4 @@
+const cron = require('node-cron');
 import * as dappeteer from "@chainsafe/dappeteer";
 import WalletService from "./services/wallet";
 import UsernameService from "./services/username";
@@ -21,6 +22,7 @@ const network: Network = {
 };
 
 const inviteLink = "https://ninneko.com/1stbirthdayparty?shareCode=48ff604f87b9806c94e96a48d6d8440e26cfcf5b";
+const inviteLink2 = "https://ninneko.com/1stbirthdayparty?shareCode=a9d13db3317e1eee1a5f04f8fc111321f80698cb";
 
 async function main() {
     console.time();
@@ -58,10 +60,18 @@ async function main() {
 
     // Event: Birthday party
     await goBirthdayParty(eventPage, username, password);
-    await eventPage.waitForTimeout(5000);
+
+    const eventPage2 = await browser.newPage();
+    await eventPage2.goto(inviteLink2);
+    await eventPage2.waitForTimeout(1000);
 
     console.timeEnd();
-    process.exit();
+    browser.close();
 }
 
-main();
+let i = 0;
+cron.schedule("* * * * *", () => {
+    i++;
+    console.log(`========== RUN #${i} ============`);
+    main();
+});
