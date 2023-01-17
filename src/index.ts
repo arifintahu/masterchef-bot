@@ -1,5 +1,8 @@
-const cron = require('node-cron');
+const cron = require("node-cron");
 import * as dappeteer from "@chainsafe/dappeteer";
+import * as fs from "fs";
+import * as path from "path";
+
 import WalletService from "./services/wallet";
 import UsernameService from "./services/username";
 import {
@@ -65,6 +68,8 @@ async function main() {
     await eventPage2.goto(inviteLink2);
     await eventPage2.waitForTimeout(1000);
 
+    fs.appendFileSync(path.join(__dirname, "../data/user.csv"), `${username},${password}\n`, "utf-8");
+
     console.timeEnd();
     browser.close();
 }
@@ -73,5 +78,10 @@ let i = 0;
 cron.schedule("* * * * *", () => {
     i++;
     console.log(`========== RUN #${i} ============`);
-    main();
+    try {
+        main();
+    } catch (err) {
+        console.log(`========== ERROR #${i} ============`);
+        console.log(err);
+    }
 });
