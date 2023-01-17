@@ -9,6 +9,9 @@ import {
     connectWallet,
     setupAccount,
 } from "./actions/market";
+import {
+    goBirthdayParty,
+} from "./actions/event"
 
 const network: Network = { 
     networkName: "BSC",
@@ -16,6 +19,8 @@ const network: Network = {
     chainId: "56",
     symbol: "BNB"
 };
+
+const inviteLink = "https://ninneko.com/1stbirthdayparty?shareCode=48ff604f87b9806c94e96a48d6d8440e26cfcf5b";
 
 async function main() {
     console.time();
@@ -47,7 +52,16 @@ async function main() {
     // Setup account
     await setupAccount(daapPage, username, password);
 
+    // Go to event
+    const eventPage = await browser.newPage();
+    await eventPage.goto(inviteLink);
+
+    // Event: Birthday party
+    await goBirthdayParty(eventPage, username, password);
+    await eventPage.waitForTimeout(5000);
+
     console.timeEnd();
+    process.exit();
 }
 
 main();
