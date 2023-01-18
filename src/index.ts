@@ -27,8 +27,8 @@ const network: Network = {
 const inviteLink = "https://ninneko.com/1stbirthdayparty?shareCode=48ff604f87b9806c94e96a48d6d8440e26cfcf5b";
 const inviteLink2 = "https://ninneko.com/1stbirthdayparty?shareCode=a9d13db3317e1eee1a5f04f8fc111321f80698cb";
 
-async function main() {
-    console.time();
+async function main(num: number) {
+    console.time(`Process-${num}`);
 
     // Generate username
     const username = UsernameService.generate();
@@ -70,7 +70,7 @@ async function main() {
 
     fs.appendFileSync(path.join(__dirname, "../data/user.csv"), `${username},${password}\n`, "utf-8");
 
-    console.timeEnd();
+    console.timeEnd(`Process-${num}`);
     browser.close();
 }
 
@@ -79,7 +79,7 @@ cron.schedule("* * * * *", () => {
     i++;
     console.log(`========== RUN #${i} ============`);
     try {
-        main();
+        main(i);
     } catch (err) {
         console.log(`========== ERROR #${i} ============`);
         console.log(err);
