@@ -41,13 +41,21 @@ async function main(start: number, end: number) {
     
     for (const user of users) {
         console.time(`${user.username}`);
-        const browser = await puppeteer.launch();
-        const page = await browser.newPage();
-        await page.goto(inviteLink);
-
-        const result = await goBirthdayPartyPuppeteer(page, user.username, user.password);
         
-        console.log("user: %s - %s", user.username, result);
+        try {
+            const browser = await puppeteer.launch();
+            const page = await browser.newPage();
+            await page.goto(inviteLink);
+
+            const result = await goBirthdayPartyPuppeteer(page, user.username, user.password);
+            
+            console.log("SUCCESS: %s - %s", user.username, result);
+
+            await browser.close();
+        } catch (error) {
+            console.log("ERROR: %s - %s", user.username, error);
+        }
+
         console.timeEnd(`${user.username}`);
         console.log("\n");
     }
@@ -56,4 +64,4 @@ async function main(start: number, end: number) {
     process.exit();
 }
 
-main(2, 3);
+main(51, 150);
