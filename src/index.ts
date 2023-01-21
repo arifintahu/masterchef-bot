@@ -15,7 +15,7 @@ import {
 } from "./actions/market";
 import {
     goBirthdayParty,
-} from "./actions/event"
+} from "./actions/event";
 
 const network: Network = { 
     networkName: "BSC",

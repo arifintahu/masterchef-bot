@@ -5,12 +5,14 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "node .",
-    "build": "tsc"
+    "build": "tsc",
+    "execute": "node dist/execute.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@chainsafe/dappeteer": "^4.0.2",
+    "csv-parse": "^5.3.3",
     "eth-lightwallet": "^4.0.0",
     "node-cron": "^3.0.2",
     "playwright": "^1.29.1",
