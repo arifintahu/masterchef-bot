@@ -64,4 +64,4 @@ async function main(start: number, end: number) {
     process.exit();
 }
 
-main(501, 1000);
+main(1001, 1500);
