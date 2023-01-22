@@ -24,8 +24,8 @@ const network: Network = {
     symbol: "BNB"
 };
 
-const inviteLink = "https://ninneko.com/1stbirthdayparty?shareCode=48ff604f87b9806c94e96a48d6d8440e26cfcf5b";
-const inviteLink2 = "https://ninneko.com/1stbirthdayparty?shareCode=a9d13db3317e1eee1a5f04f8fc111321f80698cb";
+const inviteLink = "https://ninneko.com/1stbirthdayparty?shareCode=48ff604f87b9806c94e96a48d6d8440e26cfcf5b"; //SunEater
+const inviteLink2 = "https://ninneko.com/1stbirthdayparty?shareCode=fc98ec242d51f46a35427d08b146f09bd5d8d29c"; //SunEater2
 
 async function main(num: number) {
     console.time(`Process-${num}`);
