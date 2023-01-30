@@ -27,7 +27,7 @@ const network: Network = {
 const inviteLink = "https://ninneko.com/1stbirthdayparty?shareCode=48ff604f87b9806c94e96a48d6d8440e26cfcf5b"; //SunEater
 const inviteLink2 = "https://ninneko.com/1stbirthdayparty?shareCode=fc98ec242d51f46a35427d08b146f09bd5d8d29c"; //SunEater2
 
-async function main(num: number) {
+async function main(num: number): Promise<void> {
     console.time(`Process-${num}`);
 
     // Generate username
@@ -75,13 +75,21 @@ async function main(num: number) {
 }
 
 let i = 0;
-cron.schedule("* * * * *", () => {
+let numError = 0;
+cron.schedule("* * * * *", async () => {
     i++;
     console.log(`========== RUN #${i} ============`);
     try {
-        main(i);
+        await main(i);
     } catch (err) {
         console.log(`========== ERROR #${i} ============`);
         console.log(err);
+        
+        numError++;
+        console.log('numError:', numError);
+
+        if (numError > 5) {
+            process.exit();
+        }
     }
 });
